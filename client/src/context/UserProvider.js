@@ -69,7 +69,7 @@ function UserProvider(props) {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-    function addTodo(newIssue){
+    function addNewIssue(newIssue){
         userAxios.post("/api/issue", newIssue)
             .then(res => {
                 setUserState(prevState => ({
@@ -79,7 +79,6 @@ function UserProvider(props) {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-
     return (
         <UserContext.Provider
             value={{
@@ -87,7 +86,7 @@ function UserProvider(props) {
                 signup,
                 login,
                 logout,
-                addIssue
+                addNewIssue
             }}
         >
             {props.children}
