@@ -27,7 +27,7 @@ function IssueForm(props){
 
   const { issue, description} = inputs
   return (
-      <Form>
+      <Form onSubmit={handleSubmit}>
           <Form.Group>
               <Form.Label>Issue</Form.Label>
               <Form.Control 
@@ -48,7 +48,7 @@ function IssueForm(props){
                 placeholder="Description"
                 />
           </Form.Group>
-          <Button>Add Issue</Button>
+          <Button type="submit" >Add Issue</Button>
       </Form>
     
   )

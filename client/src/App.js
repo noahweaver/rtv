@@ -1,10 +1,9 @@
 import React, {useContext} from 'react'
-import { Routes, Route, Redirect } from 'react-router-dom'
-import Navbar from './components/Navbar.'
-import Auth from './pages/Auth.'
-import Profile from './pages/Profile.'
-import Public from './pages/Public.'
-import Footer from './components/Footer'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Auth from './pages/Auth'
+import Profile from './pages/Profile'
+import Public from './pages/Public'
 import { UserContext } from './context/UserProvider'
 
 function App(){
@@ -17,18 +16,17 @@ function App(){
       <Routes>
         <Route 
           exact path="/" 
-          render={()=> token ? <Redirect to="/profile" /> : <Auth />}
+          element={token ? <Navigate to="/profile" /> : <Auth />}
         />
         <Route 
           path="/profile"
-          render={() => <Profile />}
+          element={<Profile />}
         />
         <Route 
           path="/public"
-          render={() => <Public />}
+          element={<Public />}
         />
       </Routes>
-      <Footer />
     </>
   )
 }

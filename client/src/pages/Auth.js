@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { UserContext } from '../context/UserProvider.js'
-import AuthForm from './components/AuthForm.js'
+import AuthForm from '../components/AuthForm'
+import { UserContext } from '../context/UserProvider'
+
 
 const initInputs = { username: "", password: "" }
 
@@ -19,18 +20,20 @@ function Auth(){
   }
 
   function handleSignup(e){
+    console.log("handleSignup was called")
     e.preventDefault()
     signup(inputs)
   }
 
   function handleLogin(e){
+    console.log("handleLogin was called")
     e.preventDefault()
     login(inputs)
   }
 
   return (
     <div>
-      <h1>Todo App</h1>
+      <h1>Rock The Vote</h1>
       { !toggle ?
         <>
           <AuthForm 

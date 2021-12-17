@@ -2,13 +2,12 @@ import React from 'react'
 
 function Issue(props){
 
-  const {title, description, imgUrl, _id}
+  const {issue, description, _id} = props
 
   return (
     <div>
-      <h1>{title}</h1>
-      <h2>{description}</h2>
-      <img src={imgUrl} alt={imgUrl} width={250} />
+      <h1>{issue}</h1>
+      <p>{description}</p>
     </div>
   )
 }

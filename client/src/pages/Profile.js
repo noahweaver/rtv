@@ -7,7 +7,9 @@ import { UserContext } from '../context/UserProvider'
 function Profile(){
 
   const {
-    user: {username}, 
+    user: {
+      username
+    }, 
     addNewIssue,
     issues
   } = useContext(UserContext)
@@ -17,7 +19,7 @@ function Profile(){
       <h1>Welcome @{username}!</h1>
       <h3>Add an Issue</h3>
       <IssueForm addNewIssue={addNewIssue}/>
-      <h3>Your Issue</h3>
+      <h3>Your Issues</h3>
       <IssueList issues={issues}/>
     </div>
   )

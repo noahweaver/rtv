@@ -8,7 +8,7 @@ function AuthForm(props) {
         handleChange,
         handleSubmit,
         btnText,
-        inouts: {
+        inputs: {
             username,
             password
         }
@@ -37,7 +37,7 @@ function AuthForm(props) {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Button>{btnText}</Button>
+                <Button type="submit" >{btnText}</Button>
             </Form>
         </>
     )

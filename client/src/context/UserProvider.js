@@ -4,15 +4,15 @@ export const UserContext = React.createContext()
 const userAxios = axios.create()
 
 userAxios.interceptors.request.use(config => {
-    const {token} = localStorage.getItem("token")
+    const token = localStorage.getItem("token")
     config.headers.Authorization = `Bearer ${token}`
     return config
 })
 
-function UserProvider(props) {
+export default function UserProvider(props) {
 
     const initState = {
-        user: JSON.parse(localStorage.getItem(user)) || {},
+        user: JSON.parse(localStorage.getItem("user")) || {},
         token: localStorage.getItem("token") || "",
         issues: []
     }
@@ -20,13 +20,16 @@ function UserProvider(props) {
 
     //functions
     function signup(credentials){
+        console.log("context signup was called", credentials)
         axios.post("/auth/signup", credentials)
+            // .then(res => console.log(res))
             .then(res => {
+                console.log(res)
                 const {user, token} = res.data
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user))
-                setUserState(prevUserState => ({
-                    ...prevUserState,
+                setUserState(prev => ({
+                    ...prev,
                     user,
                     token
                 }))
@@ -64,7 +67,7 @@ function UserProvider(props) {
             .then(res => {
                 setUserState(prevState => ({
                     ...prevState,
-                    issues: [...prevState, res.data]
+                    issues: res.data
                 }))
             })
             .catch(err => console.log(err.response.data.errMsg))
@@ -72,6 +75,7 @@ function UserProvider(props) {
     function addNewIssue(newIssue){
         userAxios.post("/api/issue", newIssue)
             .then(res => {
+                console.log(res)
                 setUserState(prevState => ({
                     ...prevState,
                     issues: [...prevState.issues, res.data]
@@ -93,6 +97,3 @@ function UserProvider(props) {
         </UserContext.Provider>
     )
 }
-
-
-export {UserProvider, UserContext}
