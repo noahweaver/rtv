@@ -5,7 +5,7 @@ import Issue from '../components/Issue'
 function Public(){
   return (
     <div className="public">
-
+        <h1>PUBLIC PAGE</h1>
     </div>
   )
 }

@@ -27,7 +27,7 @@ function IssueForm(props){
 
   const { issue, description} = inputs
   return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="w-25p">
           <Form.Group>
               <Form.Label>Issue</Form.Label>
               <Form.Control 

@@ -15,7 +15,7 @@ function Profile(){
   } = useContext(UserContext)
 
   return (
-    <div className="profile">
+    <div className="container">
       <h1>Welcome @{username}!</h1>
       <h3>Add an Issue</h3>
       <IssueForm addNewIssue={addNewIssue}/>

@@ -8,6 +8,7 @@ function AuthForm(props) {
         handleChange,
         handleSubmit,
         btnText,
+        errMsg,
         inputs: {
             username,
             password
@@ -39,6 +40,7 @@ function AuthForm(props) {
                 </Form.Group>
                 <Button type="submit" >{btnText}</Button>
             </Form>
+            <p style={{color: "red"}}>{errMsg}</p>
         </>
     )
 }

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
-const { constants } = require('perf_hooks')
 
 const userSchema= new Schema({
     username: {

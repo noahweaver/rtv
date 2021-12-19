@@ -13,6 +13,15 @@
 
                                         /* Sizing */
 /* By Percent (%) */
+.w-15p{
+    width: 15%;
+}
+.w-20p{
+    width: 20%;
+}
+.w-25p{
+    width: 25%;
+}
 .w-35p{
     width: 35%;
 }
