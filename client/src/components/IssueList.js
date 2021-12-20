@@ -6,9 +6,9 @@ function IssueList(props){
   const {issues} = props
 
   return (
-    <div>
+    <ul>
       {issues.map(issue => <Issue {...issue} key={issue._id} />)}
-    </div>
+    </ul>
   )
 }
 

@@ -5,10 +5,11 @@ function Issue(props){
   const {issue, description, _id} = props
 
   return (
-    <div>
+    <li>
       <h1>{issue}</h1>
+      {/* username of poster? */}
       <p>{description}</p>
-    </div>
+    </li>
   )
 }
 
