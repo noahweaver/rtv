@@ -113,6 +113,7 @@ export default function UserProvider(props) {
     }
 
     function handleAuthErr(errMsg){
+        console.log("handAuthErr", errMsg)
         setUserState(prev => ({
             ...prev, 
             errMsg
@@ -138,7 +139,7 @@ export default function UserProvider(props) {
                 getUserIssues
             }}
         >
-            {props.children}
+            { props.children }
         </UserContext.Provider>
     )
 }

@@ -39,8 +39,8 @@ function AuthForm(props) {
                     />
                 </Form.Group>
                 <Button type="submit" >{btnText}</Button>
+                <p style={{color: "red"}}> {errMsg} </p>
             </Form>
-            <p style={{color: "red"}}>{errMsg}</p>
         </>
     )
 }
