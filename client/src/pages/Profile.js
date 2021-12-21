@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import IssueForm from '../components/IssueForm'
 import IssueList from '../components/IssueList'
 import Issue from '../components/Issue'
@@ -12,11 +12,20 @@ function Profile(){
     }, 
     issues,
     addNewIssue,
+    getUserIssues
   } = useContext(UserContext)
 
-// if issue is submitted on profile page and then user navigates to public page, 
-  //  new issue does not render until page is refreshed
+  useEffect(() => {
+    getUserIssues()
+  }, [])
+  
+  console.log("Profile Page issues render", issues)
 
+  // const userIssues = localStorage.getItem(JSON.parse("User Issues"))
+
+
+  // console.log("UserIssuesArray", userIssuesArr)
+  // const UserIssuesMap = userIssuesArr.map(issue => <Issue {...issue} key={issue._id} />)
 
   return (
     <div className="container">
@@ -25,9 +34,9 @@ function Profile(){
       <IssueForm addNewIssue={addNewIssue}/>
       <h3>Your Issues</h3>
       <ul>
+       
       {issues ? issues.map(issue => <Issue {...issue} key={issue._id} />) : null}
       </ul>
-      {/* <IssueList issues={issues}/> */}
     </div>
   )
 }

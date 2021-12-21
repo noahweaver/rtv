@@ -17,17 +17,19 @@ export default function UserProvider(props) {
     const initState = {
         user: JSON.parse(localStorage.getItem("user")) || {},
         token: localStorage.getItem("token") || "",
-        issues: localStorage.getItem("User Issues") || [],
+        issues: [],
         errMsg: ""
     }
     const [userState, setUserState] = useState(initState)
 
     useEffect(() => {
+        console.log("useEffect on UserProvider was called")
+
         getUserIssues()
         getPublicIssues()
     }, [])
 
-    //functions
+    //axios functions
     function signup(credentials){
         axios.post("/auth/signup", credentials)
             .then(res => {
@@ -47,13 +49,14 @@ export default function UserProvider(props) {
     }
 
     function login(credentials){
+        console.log("login was called")
+
         axios.post("/auth/login", credentials)
             .then(res => {
                 console.log(res)
                 const {user, token} = res.data
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user))
-                
                 getUserIssues()
                 getPublicIssues()
                 setUserState(prevUserState => ({
@@ -67,6 +70,37 @@ export default function UserProvider(props) {
             // .catch(err => console.dir(err))
     }
 
+    function getUserIssues(){
+        console.log("getUserIssues was called")
+
+        userAxios.get("/api/issue/user")
+            .then(res => {
+                const userIssuesList = res.data
+                console.log("UserIssuesLIst", userIssuesList)
+                localStorage.setItem("User Issues", JSON.stringify(userIssuesList))
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: userIssuesList
+                }))
+                
+            })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+
+    function addNewIssue(newIssue){
+        userAxios.post("/api/issue", newIssue)
+            .then(res => {
+                console.log(res)
+                setUserState(prevState => ({
+                    ...prevState,
+                    issues: [...prevState.issues, res.data]
+                }))
+                const newIssue = res.data
+                setPublicIssues(prevState => ([...prevState, newIssue]))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    //functions
     function logout(){
         localStorage.removeItem("token")
         localStorage.removeItem("user")
@@ -92,34 +126,6 @@ export default function UserProvider(props) {
         }))
     }
 
-    function getUserIssues(){
-        userAxios.get("/api/issue/user")
-            .then(res => {
-                console.log(res.data)
-                localStorage.setItem("User Issues", JSON.stringify(res.data))
-                setUserState(prevState => ({
-                    ...prevState,
-                    issues: res.data
-                }))
-                
-            })
-            .catch(err => console.log(err.response.data.errMsg))
-    }
-
-    function addNewIssue(newIssue){
-        userAxios.post("/api/issue", newIssue)
-            .then(res => {
-                console.log(res)
-                setUserState(prevState => ({
-                    ...prevState,
-                    issues: [...prevState.issues, res.data]
-                }))
-                const newIssue = res.data
-                setPublicIssues(prevState => ([...prevState, newIssue]))
-            })
-            .catch(err => console.log(err.response.data.errMsg))
-    }
-    
     return (
         <UserContext.Provider
             value={{
@@ -128,7 +134,8 @@ export default function UserProvider(props) {
                 login,
                 logout,
                 addNewIssue,
-                resetAuthErr
+                resetAuthErr, 
+                getUserIssues
             }}
         >
             {props.children}

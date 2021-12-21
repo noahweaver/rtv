@@ -9,6 +9,10 @@ function Issue(props){
       <h1>{issue}</h1>
       {/* username of poster? */}
       <p>{description}</p>
+      
+      {/* upvotes and downvotes */}
+      {/* comments */}
+
     </li>
   )
 }

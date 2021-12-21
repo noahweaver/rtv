@@ -60,6 +60,10 @@ function Auth(){
           <p onClick={toggleForm}>Not a member?</p>
         </>
       }
+
+      {/* error messages display */}
+
+      
     </div>
   )
 }

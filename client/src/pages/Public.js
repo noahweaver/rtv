@@ -6,7 +6,6 @@ import { PublicContext } from '../context/PublicProvider'
 function Public(){
 
   const { publicIssues } = useContext(PublicContext)
-  console.log(publicIssues)
 
 //issues list doesn't render until I hit refresh
 
