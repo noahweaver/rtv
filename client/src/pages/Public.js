@@ -8,11 +8,12 @@ function Public(){
   const { publicIssues } = useContext(PublicContext)
   console.log(publicIssues)
 
+//issues list doesn't render until I hit refresh
+
   return (
     <div className="public">
         <h1>PUBLIC PAGE</h1>
-        
-        {publicIssues ? <IssueList issues={publicIssues} /> : null}
+        {publicIssues ? publicIssues.map(issue => <Issue {...issue} key={issue._id} />) : null}
     </div>
   )
 }
