@@ -32,7 +32,6 @@ function getSingleIssue(){
 
     return (
         <div>
-            <h1>Issue Dashboard</h1>
             <h1>Title: {issue}</h1>
             <p>Descripton: {description}</p>
             <p>Comments: {comments}</p>

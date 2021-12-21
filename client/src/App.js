@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Auth from './pages/Auth'
 import Profile from './pages/Profile'
 import Public from './pages/Public'
+import IssueDashboard from './components/IssueDashboard.js'
 import ProtectedRoute from './components/ProtectedRoute'
 import { UserContext } from './context/UserProvider'
 
@@ -25,6 +26,9 @@ function App(){
         </Route>
         <Route element={<ProtectedRoute token={token} />} >
           <Route path="/public" element={<Public />}/>
+        </Route>
+        <Route element={<ProtectedRoute token={token} />} >
+          <Route path="/issue/:issueId" element={<IssueDashboard />}/>
         </Route>
       </Routes>
     </div>
