@@ -10,11 +10,11 @@ import './css/rtvStyles.css'
 
 ReactDOM.render(
   <Router>
-    <UserProvider>
-      <PublicProvider>
+    <PublicProvider>
+      <UserProvider>
       <App/>
-      </PublicProvider>
-    </UserProvider>
+      </UserProvider>
+    </PublicProvider>
   </Router>, 
   document.getElementById('root')
 )
