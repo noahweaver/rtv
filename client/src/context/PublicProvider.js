@@ -15,9 +15,9 @@ export default function PublicProvider(props) {
     const [publicIssues, setPublicIssues] = useState([])
 
     //useEffect for now, maybe change to add to login or when navigating to public
-    useEffect(() => {
-        getPublicIssues()
-    }, [])
+    // useEffect(() => {
+    //     getPublicIssues()
+    // }, [])
 
     
     //get all comments
@@ -25,9 +25,12 @@ export default function PublicProvider(props) {
         userAxios.get("/api/issue")
             .then(res => {
                 console.log(res.data)
-                setPublicIssues(prev => ([...prev, res.data]))
+                const issueArray = res.data
+                localStorage.setItem("Public Issues", JSON.stringify(res.data))
+                setPublicIssues([...issueArray])
                 // will need to sort by upvotes when done
             })
+            // is JSON.stringify() the answer here?
             .catch(err => console.log(err.response.data.errMsg))
     }
 
@@ -35,6 +38,7 @@ export default function PublicProvider(props) {
         <PublicContext.Provider
             value={{
                 publicIssues,
+                setPublicIssues,
                 getPublicIssues,
             }}
             >
