@@ -23,8 +23,6 @@ export default function UserProvider(props) {
     const [userState, setUserState] = useState(initState)
 
     useEffect(() => {
-        console.log("useEffect on UserProvider was called")
-
         getUserIssues()
         getPublicIssues()
     }, [])
@@ -33,7 +31,6 @@ export default function UserProvider(props) {
     function signup(credentials){
         axios.post("/auth/signup", credentials)
             .then(res => {
-                console.log(res)
                 const {user, token} = res.data
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user))
@@ -49,8 +46,6 @@ export default function UserProvider(props) {
     }
 
     function login(credentials){
-        console.log("login was called")
-
         axios.post("/auth/login", credentials)
             .then(res => {
                 console.log(res)
@@ -71,12 +66,9 @@ export default function UserProvider(props) {
     }
 
     function getUserIssues(){
-        console.log("getUserIssues was called")
-
         userAxios.get("/api/issue/user")
             .then(res => {
                 const userIssuesList = res.data
-                console.log("UserIssuesLIst", userIssuesList)
                 localStorage.setItem("User Issues", JSON.stringify(userIssuesList))
                 setUserState(prevState => ({
                     ...prevState,
