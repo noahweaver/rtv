@@ -92,6 +92,15 @@ export default function UserProvider(props) {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
+    function deleteIssue(id){
+        console.log("deleteIssue", "id", id)
+        userAxios.delete(`/api/issue/${id}`)
+            .then(res => {
+                console.log(res.data)
+                getUserIssues()
+            })
+            .catch(err => console.log(err))
+    }
     //functions
     function logout(){
         localStorage.removeItem("token")
@@ -128,7 +137,8 @@ export default function UserProvider(props) {
                 logout,
                 addNewIssue,
                 resetAuthErr, 
-                getUserIssues
+                getUserIssues,
+                deleteIssue
             }}
         >
             { props.children }

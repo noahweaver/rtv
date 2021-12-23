@@ -12,7 +12,8 @@ function Profile(){
     }, 
     issues,
     addNewIssue,
-    getUserIssues
+    getUserIssues,
+    deleteIssue
   } = useContext(UserContext)
 
   useEffect(() => {
@@ -35,7 +36,13 @@ function Profile(){
       <h3>Your Issues</h3>
       <ul>
        
-      {issues ? issues.map(issue => <Issue {...issue} key={issue._id} />) : null}
+      {issues ? issues.map(issue => 
+        <>
+          <Issue {...issue} key={issue._id} />
+            <button onClick={() => deleteIssue(issue._id)}>Delete Issue</button>
+            </>) 
+      : null}
+
       </ul>
     </div>
   )
