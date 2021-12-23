@@ -6,9 +6,18 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    user: {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    issueId: {
+        type: Schema.Types.ObjectId,
+        ref: "Issue",
         required: true
     }
 })

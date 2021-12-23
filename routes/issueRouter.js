@@ -1,7 +1,6 @@
 const express = require("express")
 const issueRouter = express.Router()
 const Issue = require('../models/issue.js')
-const Comment = require('../models/comment.js')
 
 // Get All Issues
 issueRouter.get("/", (req, res, next) => {
@@ -51,6 +50,7 @@ issueRouter.get("/:issueId", (req, res, next) => {
     )
 })
 
+
 // Delete Issue
 issueRouter.delete("/:issueId", (req, res, next) => {
   Issue.findOneAndDelete(
@@ -68,8 +68,8 @@ issueRouter.delete("/:issueId", (req, res, next) => {
 // Update Issue
 issueRouter.put("/:issueId", (req, res, next) => {
   Issue.findOneAndUpdate(
-    { _id: req.params.issueId, user: req.user._id },
-    req.body,
+    { _id: req.params.issueId, user: req.user._id},
+    req.body, 
     { new: true },
     (err, updatedIssue) => {
       if(err){

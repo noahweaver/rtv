@@ -7,16 +7,19 @@ const issueSchema = new Schema({
         required: true
     },
     description:{
-        type: String
+        type: String,
+        required: true
     },
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
-    comments: {
-        type: Array,
-        ref: "Comment"
+    upVotes: {
+        type: Number
+    },
+    downVotes: {
+        type: Number
     }
 });
 

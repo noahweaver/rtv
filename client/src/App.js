@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import Auth from './pages/Auth'
 import Profile from './pages/Profile'
 import Public from './pages/Public'
-import IssueDashboard from './components/IssueDashboard.js'
+import IssueDashboard from './pages/IssueDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { UserContext } from './context/UserProvider'
 
