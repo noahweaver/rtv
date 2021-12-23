@@ -3,6 +3,8 @@ import axios from 'axios'
 import {useParams} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import CommentCard from '../components/CommentCard'
+import CommentForm from '../components/CommentForm'
+
 
 const userAxios = axios.create()
 
@@ -18,8 +20,9 @@ function IssueDashboard (props) {
 
 const [singleIssue, setSingleIssue] = useState({})
 const [comments, setComments] = useState([])
+const [commentToggle, setCommentToggle] = useState(false)
+const [commentInput, setCommentInput] = useState({comment: ""})
 const {issueId} = useParams()
-
 const {issue, description} = singleIssue
 
 
@@ -28,6 +31,11 @@ useEffect(() => {
     getSingleIssue()
     getIssueComments()
 }, [])
+
+function handleChange(e){
+    const {name, value} = e.target
+    setCommentInput(prevInputs => ({...prevInputs, [name]: value}))
+  }
 
 function getSingleIssue(){
     userAxios.get(`/api/issue/${issueId}`)
@@ -47,14 +55,13 @@ function getIssueComments(){
 }
 // add comment => POST
 
-
-function addComment(issueId){
-    console.log("Add Comment was called")
-    axios.put(`/issues/${issueId}`)
-        .then(res => {
-            const updates = res.data
-            setSingleIssue(prevState => ({...prevState, updates}))
-        })
+function addComment(newComment){
+    console.log("newComment", newComment)
+    userAxios.post(`/api/comment/${issueId}`, newComment)
+        .then(res => setComments(prevComments => [...prevComments, res.data]))
+        .then(setCommentToggle(false))
+        .then(setCommentInput(""))
+        .then(getIssueComments())
         .catch(err => console.log(err))
 }
 
@@ -73,7 +80,15 @@ function addComment(issueId){
             null
             }
             </ul>
-            <Button onClick={addComment} >Add a Comment</Button>
+            {!commentToggle ? <Button onClick={() => setCommentToggle(true)} >Add a Comment</Button> : null}
+            {commentToggle ? <CommentForm 
+                        handleChange={handleChange}
+                        addComment={addComment}
+                        setCommentToggle={setCommentToggle}
+                        comment={commentInput}
+                        setCommentInput={setCommentInput}
+                        /> 
+                        : null}
         </div>
     )
 }
