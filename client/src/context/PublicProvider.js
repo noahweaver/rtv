@@ -14,7 +14,6 @@ export default function PublicProvider(props) {
 
     const [publicIssues, setPublicIssues] = useState([])
     
-    //get all comments
     function getPublicIssues(){
         userAxios.get("/api/issue")
             .then(res => {
@@ -26,12 +25,33 @@ export default function PublicProvider(props) {
             .catch(err => console.log(err.response.data.errMsg))
     }
 
+    function upVote(issueId, userId){
+        console.log("upVote", issueId, "userId", userId)
+        userAxios.put(`api/issue/upvotes/${issueId}`, userId)
+            .then(res => {
+                console.log(res)
+                getPublicIssues()
+            }
+                )
+            .catch(err => console.log(err))
+    }
+
+    function downVote(issueId){
+        console.log("downVote", issueId)
+        userAxios.put(`api/issue/downvotes/${issueId}`)
+            .then(res => getPublicIssues())
+            .catch(err => console.log(err))
+    }
+
+
     return (
         <PublicContext.Provider
             value={{
                 publicIssues,
                 setPublicIssues,
                 getPublicIssues,
+                upVote,
+                downVote
             }}
             >
             {props.children}

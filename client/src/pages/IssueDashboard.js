@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import axios from 'axios'
 import {useParams} from 'react-router-dom'
+import { PublicContext } from '../context/PublicProvider'
 import Button from 'react-bootstrap/Button'
 import CommentCard from '../components/CommentCard'
 import CommentForm from '../components/CommentForm'
@@ -17,13 +18,19 @@ userAxios.interceptors.request.use(config => {
 
 function IssueDashboard (props) {
 
-
+const {upVote, downVote} = useContext(PublicContext)
 const [singleIssue, setSingleIssue] = useState({})
 const [comments, setComments] = useState([])
 const [commentToggle, setCommentToggle] = useState(false)
 const [commentInput, setCommentInput] = useState({comment: ""})
 const {issueId} = useParams()
-const {issue, description} = singleIssue
+const {
+    issue, 
+    description, 
+    upVotes, 
+    downVotes, 
+    _id
+} = singleIssue
 
 
 useEffect(() => {
@@ -69,6 +76,8 @@ function addComment(newComment){
         <div>
             <h1>Title: {issue}</h1>
             <p>Descripton: {description}</p>
+            <p>{upVotes} <Button onClick={() => upVote(_id)}>upvote</Button></p>
+            <p>{downVotes} <Button onClick={() => downVote(_id)}>downvote</Button></p>
             <ul>
             {comments ? 
                 comments.map(comment => 

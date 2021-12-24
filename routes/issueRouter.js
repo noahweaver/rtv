@@ -81,4 +81,71 @@ issueRouter.put("/:issueId", (req, res, next) => {
   )
 })
 
+//Upvote
+issueRouter.put("/upvotes/:issueId", (req, res, next) => {
+  Issue.findOne(
+    { _id: req.params.issueId},
+    (err, issue) => {
+      if(err){
+        res.status(500)
+        return next(err)
+      }
+      if(issue.voters.includes(req.user._id)){
+        res.status(403)
+        return next(new Error("You already voted on this issue"))
+      } else {
+        Issue.findOneAndUpdate(
+          { _id: req.params.issueId },
+          { 
+            $inc: { upVotes: 1 }, 
+            $push: { voters: req.user._id}
+          },
+          { new: true },
+          (err, issue) => {
+            if (err) {
+              res.status(500)
+              return next(err)
+            }
+            return res.status(201).send(issue)
+          })
+      }
+    })
+  })
+
+  //downvote
+issueRouter.put("/downvotes/:issueId", (req, res, next) => {
+  Issue.findOne(
+    { _id: req.params.issueId},
+    (err, issue) => {
+      if(err){
+        res.status(500)
+        return next(err)
+      }
+      if(issue.voters.includes(req.user._id)){
+        res.status(403)
+        return next(new Error("You already voted on this issue"))
+      } else {
+        Issue.findOneAndUpdate(
+          { _id: req.params.issueId },
+          { 
+            $inc: { downVotes: 1 }, 
+            $push: { voters: req.user._id}
+          },
+          { new: true },
+          (err, issue) => {
+            if (err) {
+              res.status(500)
+              return next(err)
+            }
+            return res.status(201).send(issue)
+          })
+      }
+    })
+  })
+
+
+//removeupvote
+//remove downvote
+
+
 module.exports = issueRouter

@@ -1,5 +1,5 @@
 import React from 'react'
-import Issue from '../components/Issue'
+import Issue from './UserIssue'
 
 function IssueList(props){
 

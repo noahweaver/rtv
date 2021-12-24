@@ -16,10 +16,16 @@ const issueSchema = new Schema({
         required: true
     },
     upVotes: {
-        type: Number
+        type: Number,
+        default: 0
     },
     downVotes: {
-        type: Number
+        type: Number,
+        default: 0
+    },
+    voters: {
+        type: Array,
+        required: true
     }
 });
 

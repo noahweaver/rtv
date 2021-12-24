@@ -92,14 +92,27 @@ export default function UserProvider(props) {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-    function deleteIssue(id){
-        console.log("deleteIssue", "id", id)
-        userAxios.delete(`/api/issue/${id}`)
+    function deleteIssue(issueId){
+        console.log("deleteIssue", "id", issueId)
+        userAxios.delete(`/api/issue/${issueId}`)
             .then(res => {
                 console.log(res.data)
                 getUserIssues()
+                getPublicIssues()
             })
             .catch(err => console.log(err))
+    }
+
+    function editIssue(updates, issueId){
+        console.log("edit issue")
+        console.log("updates", updates)
+        console.log("issueId", issueId)
+        userAxios.put(`/api/issue/${issueId}`, updates)
+            .then(res => {
+                console.log(res.data)
+                getUserIssues()
+                getPublicIssues()
+            })
     }
     //functions
     function logout(){
@@ -138,7 +151,8 @@ export default function UserProvider(props) {
                 addNewIssue,
                 resetAuthErr, 
                 getUserIssues,
-                deleteIssue
+                deleteIssue,
+                editIssue
             }}
         >
             { props.children }
