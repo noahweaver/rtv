@@ -18,6 +18,7 @@ export default function PublicProvider(props) {
         userAxios.get("/api/issue")
             .then(res => {
                 const issueArray = res.data
+                issueArray.sort((a, b) => parseFloat(b.upVotes) - parseFloat(a.upVotes));
                 localStorage.setItem("Public Issues", JSON.stringify(res.data))
                 setPublicIssues([...issueArray])
                 // will need to sort by upvotes when done
@@ -26,20 +27,20 @@ export default function PublicProvider(props) {
     }
 
     function upVote(issueId, userId){
-        console.log("upVote", issueId, "userId", userId)
-        userAxios.put(`api/issue/upvotes/${issueId}`, userId)
+        userAxios.put(`/api/issue/upvotes/${issueId}`, userId)
             .then(res => {
-                console.log(res)
                 getPublicIssues()
-            }
-                )
-            .catch(err => console.log(err))
+                
+             })            
+             .catch(err => console.log(err))
     }
 
-    function downVote(issueId){
-        console.log("downVote", issueId)
-        userAxios.put(`api/issue/downvotes/${issueId}`)
-            .then(res => getPublicIssues())
+    function downVote(issueId, userId){
+        userAxios.put(`/api/issue/downvotes/${issueId}`, userId)
+            .then(res => {
+                getPublicIssues()
+
+            })
             .catch(err => console.log(err))
     }
 
