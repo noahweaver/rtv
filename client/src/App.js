@@ -20,7 +20,6 @@ function App(){
           exact path="/" 
           element={token ? <Navigate to='/profile/' /> : <Auth />}
         />
-        {/* if navigating from public -> profile, user issues do not get passed*/}
         <Route element={<ProtectedRoute token={token} />} >
           <Route path="/profile" element={<Profile />}/>
         </Route>
