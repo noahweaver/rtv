@@ -19,7 +19,8 @@ mongoose.connect("mongodb://localhost:27017/rtv-db",
     console.log("Connected to the database")
     }
 )
-//add the set algorithms after secret algorithms: ['HS256'] 
+
+// Routes
 app.use("/auth", require("./routes/authRouter.js"))
 app.use("/api", expressJwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))  //req.user
 app.use("/api/issue", require("./routes/issueRouter.js"))

@@ -28,42 +28,42 @@ export default function UserProvider(props) {
     }, [])
 
     //axios functions
-    function signup(credentials){
-        axios.post("/auth/signup", credentials)
-            .then(res => {
-                const {user, token} = res.data
-                localStorage.setItem("token", token)
-                localStorage.setItem("user", JSON.stringify(user))
-                setUserState(prev => ({
-                    ...prev,
-                    user,
-                    token
-                }))
-                localStorage.setItem("userState", userState)
-            })
-            .catch(err => handleAuthErr(err.response.data.errMsg))
-            // .catch(err => console.dir(err))
-    }
+function signup(credentials){
+    axios.post("/auth/signup", credentials)
+        .then(res => {
+            const {user, token} = res.data
+            localStorage.setItem("token", token)
+            localStorage.setItem("user", JSON.stringify(user))
+            setUserState(prev => ({
+                ...prev,
+                user,
+                token
+            }))
+            localStorage.setItem("userState", userState)
+        })
+        .catch(err => handleAuthErr(err.response.data.errMsg))
+        // .catch(err => console.dir(err))
+}
 
-    function login(credentials){
-        axios.post("/auth/login", credentials)
-            .then(res => {
-                console.log(res)
-                const {user, token} = res.data
-                localStorage.setItem("token", token)
-                localStorage.setItem("user", JSON.stringify(user))
-                getUserIssues()
-                getPublicIssues()
-                setUserState(prevUserState => ({
-                    ...prevUserState,
-                    user,
-                    token
-                }))
-                
-            })
-            .catch(err => handleAuthErr(err.response.data.errMsg))
-            // .catch(err => console.dir(err))
-    }
+function login(credentials){
+    axios.post("/auth/login", credentials)
+        .then(res => {
+            console.log(res)
+            const {user, token} = res.data
+            localStorage.setItem("token", token)
+            localStorage.setItem("user", JSON.stringify(user))
+            getUserIssues()
+            getPublicIssues()
+            setUserState(prevUserState => ({
+                ...prevUserState,
+                user,
+                token
+            }))
+            
+        })
+        .catch(err => handleAuthErr(err.response.data.errMsg))
+        // .catch(err => console.dir(err))
+}
 
     function getUserIssues(){
         userAxios.get("/api/issue/user")
