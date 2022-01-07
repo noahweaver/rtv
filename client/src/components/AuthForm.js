@@ -17,6 +17,7 @@ function AuthForm(props) {
 
     return (
         <>
+        <h1>{btnText}</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
