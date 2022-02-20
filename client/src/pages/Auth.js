@@ -35,7 +35,7 @@ function Auth(){
   }
 
   return (
-    <div>
+    <div style={{ width: "300px", margin: "10% auto" }}>
       <h1>Rock The Vote</h1>
       { !toggle ?
         <>
