@@ -9,16 +9,27 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 
-// mongoose.set("useCreateIndex", true)
-mongoose.connect("mongodb://localhost:27017/rtv-db", 
-    {useNewUrlParser: true, useUnifiedTopology: true}, 
+// mongoose.connect("mongodb://localhost:27017/rtv-db", 
+//     {useNewUrlParser: true, useUnifiedTopology: true}, 
+//     (err) => {
+//         if (err) {
+//             console.log(err)
+//         } else {
+//     console.log("Connected to the database")
+//         }
+//     }
+// )
+    mongoose.connect("mongodb://127.0.0.1:27017/rtv-db",
+{useNewUrlParser: true, useUnifiedTopology: true}, 
     (err) => {
-        if (err) {
+        if(err){
             console.log(err)
+        } else {
+            console.log("Connected to the Database")
         }
-    console.log("Connected to the database")
     }
-)
+);
+
 
 // Routes
 app.use("/auth", require("./routes/authRouter.js"))

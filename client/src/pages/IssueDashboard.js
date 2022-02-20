@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { PublicContext } from '../context/PublicProvider'
 import { UserContext } from '../context/UserProvider'
 import Button from 'react-bootstrap/Button'
@@ -19,13 +19,14 @@ userAxios.interceptors.request.use(config => {
 
 function IssueDashboard (props) {
 
-const {upVote, downVote} = useContext(PublicContext)
-const {user} = useContext(UserContext)
+const { upVote, downVote } = useContext(PublicContext)
+const { user } = useContext(UserContext)
 const [singleIssue, setSingleIssue] = useState({})
 const [comments, setComments] = useState([])
 const [commentToggle, setCommentToggle] = useState(false)
-const [commentInput, setCommentInput] = useState({comment: ""})
-const {issueId} = useParams()
+const [commentInput, setCommentInput] = useState({ comment: "" })
+const { issueId } = useParams()
+
 const {
     issue, 
     description, 
