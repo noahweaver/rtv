@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import Button from 'react-bootstrap/Button'
+import Card  from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom'
 import IssueForm from './IssueForm'
 import { UserContext } from '../context/UserProvider'
@@ -20,20 +21,33 @@ function UserIssue(props){
 
   return (  
     <li>
-        <div>
-          <h1>{issue}</h1>
-          <p>{description}</p>
-          <p>Up votes: {upVotes}</p>
-          <p>Down votes: {downVotes}</p>
-
-          {/* number of up/down votes */}
+        <Card className="m-1 w-50 bg-dark text-white">
+        <Card.Body>
+          <Card.Title>{issue}</Card.Title>
+          <Card.Subtitle>{description}</Card.Subtitle>
+          <Card.Text>Up votes: {upVotes}</Card.Text>
+          <Card.Text>Down votes: {downVotes}</Card.Text>
           {editToggle ? <IssueForm submit={submitEdit} _id={_id} issue={issue} description={description}/> : null}
-          <Button onClick={() => {
+          <Button 
+            variant="light" 
+            className="m-1" 
+            onClick={() => {
             navigate(`/issue/${_id}`, {state: {issue}})
             }}>{`Go to ${issue}`}</Button>
-          <Button onClick={() => setEditToggle(prev => !prev)}>{editToggle ? 'Cancel' : 'Edit'}</Button>
-          <Button onClick={() => deleteIssue(_id)}>Delete</Button>
-        </div>
+          <Button 
+            variant="light" 
+            className="m-1" 
+            onClick={() => setEditToggle(prev => !prev)}>
+            {editToggle ? 'Cancel' : 'Edit'}
+          </Button>
+          <Button 
+            variant="light" 
+            className="m-1" 
+            onClick={() => deleteIssue(_id)}>
+            Delete
+          </Button>
+          </Card.Body>
+        </Card>
       
     </li>
   )

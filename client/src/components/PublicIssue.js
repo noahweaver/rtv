@@ -11,19 +11,21 @@ function PublicIssue(props){
 
 
   return (
-    <li>
-      <h1>{issue}</h1>
-      {/* username of poster? */}
+  <div className="border border-dark rounded w-50 m-2 p-2">
+        <h1>{issue}</h1>
       <p>{description}</p>
-      <p>{upVotes} <Button onClick={() => upVote(_id, user._id)}>upvote</Button></p>
-      <p>{downVotes} <Button onClick={() => downVote(_id, user._id)}>downvote</Button></p>
+      <p>{upVotes} <Button variant="light" className="m-1" onClick={() => upVote(_id, user._id)}>upvote</Button></p>
+      <p>{downVotes} <Button variant="light" className="m-1" onClick={() => downVote(_id, user._id)}>downvote</Button></p>
 
-    <Button onClick={() => {
-      navigate(`/issue/${_id}`, {state: {issue}})
-    }}>{`Go to ${issue}`}</Button>
-    <Button>Upvote</Button>
-    <Button>Downvote</Button>
-    </li>
+      <Button 
+        variant="light" 
+        className="m-1" 
+        onClick={() => {
+          navigate(`/issue/${_id}`, {state: {issue}})
+        }}>
+        {`Go to ${issue}`}
+      </Button>      
+  </div>
   )
 }
 

@@ -31,7 +31,7 @@ function Profile(){
       <h3>Add an Issue</h3>
       <IssueForm submit={handleSubmit} />
       <h3>Your Issues</h3>
-      <ul>
+      <ul style={{ listStyle: "none" }}>
       {issues ? issues.map(issue => <UserIssue {...issue} key={issue._id} />) : null}
       </ul>
     </div>

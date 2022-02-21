@@ -89,8 +89,8 @@ function handleDownVote(_id, userId){
         <div>
             <h1>Title: {issue}</h1>
             <p>Descripton: {description}</p>
-            <p>{upVotes} <Button onClick={() => handleUpVote(_id, user._id)}>upvote</Button></p>
-            <p>{downVotes} <Button onClick={() => handleDownVote(_id, user._id)}>downvote</Button></p>
+            <p>{upVotes} <Button onClick={() => handleUpVote(_id, user._id)}>Upvote</Button></p>
+            <p>{downVotes} <Button onClick={() => handleDownVote(_id, user._id)}>Downvote</Button></p>
             <ul>
             {comments ? 
                 comments.map(comment => 
@@ -116,9 +116,3 @@ function handleDownVote(_id, userId){
 }
 
 export default IssueDashboard
-
-
-
-
-//only able to see comments if on dashboard
-//needs to be deeplinked --> check recipe app for how I did it
