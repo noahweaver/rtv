@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import AuthForm from '../components/AuthForm'
 import { UserContext } from '../context/UserProvider'
+import Button from 'react-bootstrap/Button'
+
 
 
 const initInputs = { username: "", password: "" }
@@ -35,7 +37,8 @@ function Auth(){
   }
 
   return (
-    <div style={{ width: "300px", margin: "10% auto" }}>
+    <div style={{ marginTop: "10%", border: "solid black 2px", borderRadius: 4 }}
+    className="w-50 mx-auto p-5">
       <h1>Rock The Vote</h1>
       { !toggle ?
         <>
@@ -46,7 +49,7 @@ function Auth(){
             btnText="Sign up"
             errMsg={errMsg}
           />
-          <p onClick={toggleForm}>Already a member?</p>
+          <Button onClick={toggleForm}>Already a member?</Button>
         </>
       :
         <>
@@ -57,7 +60,7 @@ function Auth(){
             btnText="Login"
             errMsg={errMsg}
           />
-          <p onClick={toggleForm}>Not a member?</p>
+          <Button onClick={toggleForm}>Not a member?</Button>
         </>
       }
 
